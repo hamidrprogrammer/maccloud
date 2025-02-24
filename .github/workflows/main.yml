@@ -1,24 +1,25 @@
 name: MacRDP
-on: 
+on:
   workflow_dispatch:
+
 jobs:
   build:
     name: MacRDP
     runs-on: macos-latest
     
-    steps:                 
+    steps:
     - name: Enabling Remote Access
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       run: |
-          curl -s -o start.sh -L "https://raw.githubusercontent.com/hamidrprogrammer/startsh/refs/heads/main/mac/start.sh"
-          chmod +x start.sh
-          bash start.sh "$NGROK_AUTH_TOKEN"
-          
+        curl -s -o start.sh -L "https://raw.githubusercontent.com/hamidrprogrammer/startsh/refs/heads/main/mac/start.sh"
+        chmod +x start.sh
+        bash start.sh "$NGROK_AUTH_TOKEN"
+        
     - name: Log In Details To VNC Server
       run: |
-         chmod +x login.sh
-         bash login.sh
-         
+        chmod +x login.sh
+        bash login.sh
+        
     - name: MacOS System running...
       uses: mxschmitt/action-tmate@v2
